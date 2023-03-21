@@ -17,11 +17,8 @@ exports.loginController=(req, res) => {
     const sql = "SELECT * from users WHERE username = ?"
     db.get(sql,[username], function(err, row){  
       if(username == row.username && hashed_password == row.password) {
-       
         const token = generateAccessToken(row.user_id,row.username,row.isAdmin)
-
-         res.json({token})
-        //  res.send(JSON.stringify({status: "Logged in"}));
+        res.send(JSON.stringify({status: "Logged in", jwt:token}));
       }else {
           res.send(JSON.stringify({status: "Wrong credentials"}));
       }
