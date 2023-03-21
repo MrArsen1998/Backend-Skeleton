@@ -9,7 +9,7 @@ exports.showAll=(req, res)=> {
 
 exports.showProduct=(req, res) => {
     const id = req.params.id
-    db.get('SELECT * FROM products WHERE id=?', [id], (err, data) => {
+    db.get('SELECT * FROM products WHERE product_id=?', [id], (err, data) => {
         res.send(data)
     })
 }
@@ -26,14 +26,14 @@ exports.update=(req, res)=>{
     const id = req.params.id;
     const name = req.body.name;
     const price = req.body.price;
-    db.run('UPDATE products SET name=?,  price=? WHERE id=?',[name,price,id],(e)=>{
+    db.run('UPDATE products SET name=?,  price=? WHERE product_id=?',[name,price,id],(e)=>{
         res.send('Product updated succesfully')
     })
 }
 
 exports.delete=(req, res) => {
     const data_id = req.params.id
-    db.run('DELETE FROM products WHERE id=?', [data_id],(e)=>{
+    db.run('DELETE FROM products WHERE product_id=?', [data_id],(e)=>{
         res.send("Product is deleted succesfully")
     })
 }

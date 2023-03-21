@@ -6,8 +6,8 @@ require('dotenv').config()
 
 const SECRET = process.env.SECRET;
 
-function generateAccessToken(id,username,isAdmin) {
-  return jwt.sign({id,username,isAdmin},SECRET, { expiresIn: '36000s' });
+function generateAccessToken(user_id,username,isAdmin) {
+  return jwt.sign({user_id,username,isAdmin},SECRET, { expiresIn: '36000s' });
 }
 
 exports.loginController=(req, res) => {
@@ -18,7 +18,7 @@ exports.loginController=(req, res) => {
     db.get(sql,[username], function(err, row){  
       if(username == row.username && hashed_password == row.password) {
        
-        const token = generateAccessToken(row.id,row.username,row.isAdmin)
+        const token = generateAccessToken(row.user_id,row.username,row.isAdmin)
 
          res.json({token})
         //  res.send(JSON.stringify({status: "Logged in"}));

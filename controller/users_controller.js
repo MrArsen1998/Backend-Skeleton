@@ -9,14 +9,14 @@ exports.all=(req,res)=> {
 
 exports.dataID=(req,res) => {
     const id = req.params.id
-    db.get('SELECT * FROM users WHERE id=?', [id], (err, data) => {
+    db.get('SELECT * FROM users WHERE user_id=?', [id], (err, data) => {
         res.send(data)
     })
 }
 
 exports.deleteId= (req,res) => {
     const data_id = req.params.id
-    db.run('DELETE FROM users WHERE id=?', [data_id],(e)=>{
+    db.run('DELETE FROM users WHERE user_id=?', [data_id],(e)=>{
         res.send("User is succesfully deleted")
     })
 }

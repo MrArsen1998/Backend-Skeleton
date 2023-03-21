@@ -10,6 +10,8 @@ const users_routes = require('./routes/users_routes')
 const users_schema = require('./models/users_schema')
 const products_schema = require('./models/products_schema')
 const auth_routes = require('./routes/auth_routes')
+const card_routes = require('./routes/card_routes')
+const card_schema = require('./models/card_schema')
 
 
 app.use(cors())
@@ -27,6 +29,8 @@ const db = new sqlite.Database('database.db', (err) => {
 
 products_routes.create_products_routes(app)
 users_routes.create_users_routes(app)
+card_routes.create_card_routes(app)
+card_schema.create_card(db)
 users_schema.create_users(db)
 products_schema.create_products(db)
 auth_routes.register_routes(app)
